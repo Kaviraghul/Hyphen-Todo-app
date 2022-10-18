@@ -7,6 +7,8 @@ import 'package:lottie/lottie.dart';
 
 
 class PhoneAuth extends StatefulWidget {
+  static String verify = '';
+
   const PhoneAuth({ Key? key }) : super(key: key);
 
   @override
@@ -28,7 +30,9 @@ class _PhoneAuthState extends State<PhoneAuth> {
       verificationFailed: (FirebaseAuthException e) {
         print(e);
       },
-      codeSent: (String verificationId, int? resendToken)=>context.go('/otpVerificationScreen'),
+      codeSent: (String verificationId, int? resendToken){
+        PhoneAuth.verify = verificationId;
+        context.go('/otpVerificationScreen');},
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }

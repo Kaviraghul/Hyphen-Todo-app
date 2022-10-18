@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_project/Authentication/PhoneAuth/phone_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
@@ -5,11 +7,18 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:pinput/pinput.dart';
 
-class OtpVerification extends StatelessWidget {
+class OtpVerification extends StatefulWidget {
 const OtpVerification({ Key? key }) : super(key: key);
+  @override
+  State<OtpVerification> createState() => _OtpVerificationState();
+}
+
+class _OtpVerificationState extends State<OtpVerification> {
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context){
+    var pin = '';
     return Scaffold(
       body: Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -19,7 +28,11 @@ const OtpVerification({ Key? key }) : super(key: key);
             const SizedBox(height: 10),
             const Text('Eneter the Otp for verifiation', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 30),
-            const Pinput(length: 6, showCursor: true,)
+            Pinput(
+              length: 6, 
+            showCursor: true, 
+            onChanged:( (value) { pin = value;})
+            )
         ],
       )),
       bottomNavigationBar: 	Padding(
@@ -31,7 +44,17 @@ const OtpVerification({ Key? key }) : super(key: key);
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5))), 
           child: const Text('Verify OTP'),
-          onPressed: () => context.go('/homeScreen'),
+          onPressed: () async {
+            try {
+              PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: PhoneAuth.verify, smsCode: pin);
+              await auth.signInWithCredential(credential);
+              print("all went right");
+              context.go('/homeScreen');
+            } catch (e) {
+              print("something went wrong ");
+            }
+            
+          },
         ),
       ),
     );
