@@ -3,8 +3,6 @@ import 'package:firebase_auth_project/Authentication/PhoneAuth/phone_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpVerification extends StatefulWidget {
@@ -15,10 +13,27 @@ const OtpVerification({ Key? key }) : super(key: key);
 
 class _OtpVerificationState extends State<OtpVerification> {
   FirebaseAuth auth = FirebaseAuth.instance;
+  final otpController = TextEditingController();
+  var pin = '';
+
+  void handleOTPVerification()async{
+    if(otpController != null){
+      try {
+              PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: PhoneAuth.verify, smsCode: pin);
+              await auth.signInWithCredential(credential);
+              context.go('/homeScreen');
+            } catch (e) {
+              print("something went wrong ");
+            }
+    }else{
+      print("please enter OTP");
+    }
+    
+  }
 
   @override
   Widget build(BuildContext context){
-    var pin = '';
+    
     return Scaffold(
       body: Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,17 +59,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5))), 
           child: const Text('Verify OTP'),
-          onPressed: () async {
-            try {
-              PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: PhoneAuth.verify, smsCode: pin);
-              await auth.signInWithCredential(credential);
-              print("all went right");
-              context.go('/homeScreen');
-            } catch (e) {
-              print("something went wrong ");
-            }
-            
-          },
+          onPressed:() => handleOTPVerification(),
         ),
       ),
     );

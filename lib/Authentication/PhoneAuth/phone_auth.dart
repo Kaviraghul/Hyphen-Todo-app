@@ -18,10 +18,12 @@ class PhoneAuth extends StatefulWidget {
 class _PhoneAuthState extends State<PhoneAuth> {
   String phoneNumber = '';
   String countryCode = '+91';
+  final phoneController = TextEditingController();
 
   void handlePhoneAuth(BuildContext context)async{
-    await Firebase.initializeApp();
-    await FirebaseAuth.instance.verifyPhoneNumber(
+    if(phoneController != null){
+      await Firebase.initializeApp();
+      await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '${countryCode + phoneNumber}',
       verificationCompleted: (PhoneAuthCredential credential) {
         print("working kavi");
@@ -35,9 +37,14 @@ class _PhoneAuthState extends State<PhoneAuth> {
         context.go('/otpVerificationScreen');},
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
+    }else{
+      print("please enter phone number");
+    }
+    
   }
 
   @override
+
   Widget build(BuildContext context){
     return Scaffold(
       body: Padding(
@@ -52,6 +59,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
               const Text('Enter your phone number for verification', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
               const SizedBox(height: 20),
               TextField(
+                controller: phoneController,
                 autofocus: true,
                 maxLength: 10,
                 style: const TextStyle(
@@ -66,7 +74,6 @@ class _PhoneAuthState extends State<PhoneAuth> {
                 enabledBorder: InputBorder.none,
                 prefixText: "  +91 | ",
                                 contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0))
                 ),
