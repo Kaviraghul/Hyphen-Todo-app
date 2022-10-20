@@ -1,12 +1,25 @@
-
-import 'package:firebase_auth_project/Authentication/PhoneAuth/phone_auth.dart';
 import 'package:firebase_auth_project/Screens/screens.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth_project/blocs/bloc_exports.dart';
+import 'package:firebase_auth_project/models/task.dart';
 import 'package:flutter/material.dart';
 
-void main(){
-   
+void main() {
+  Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
+}
+
+class AppBlocObserver extends BlocObserver {
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    super.onChange(bloc, change);
+    if (bloc is Cubit) print(change);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    print(transition);
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -14,16 +27,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch:Colors.blue,
+    return BlocProvider(
+      create: (context) =>
+          TasksBloc()..add(AddTask(task: Task(title: "buyguygyu"))),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Screens(),
       ),
-      home: Screens(),
     );
   }
 }
-
-
-
-
