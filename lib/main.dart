@@ -1,9 +1,12 @@
 import 'package:firebase_auth_project/Screens/screens.dart';
 import 'package:firebase_auth_project/blocs/bloc_exports.dart';
 import 'package:firebase_auth_project/models/task.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
 }
@@ -28,8 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          TasksBloc()..add(AddTask(task: Task(title: "buyguygyu"))),
+      create: (context) => TasksBloc(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

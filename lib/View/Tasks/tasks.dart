@@ -13,7 +13,6 @@ class Tasks extends StatefulWidget {
 }
 
 class _TasksState extends State<Tasks> {
-  void _addNewTask() {}
   final titleController = TextEditingController();
   @override
   Widget build(BuildContext context) {

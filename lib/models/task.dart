@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Task extends Equatable {
@@ -23,7 +24,7 @@ class Task extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'Title': title,
+      'title': title,
       'isDone': isDone,
       'isDeleted': isDeleted,
     };
@@ -31,10 +32,22 @@ class Task extends Equatable {
 
   factory Task.fromMap(Map<String, dynamic> map) {
     return Task(
-      title: map['Title'] ?? '',
+      title: map['title'] ?? '',
       isDone: map['isDone'],
       isDeleted: map['isDeleted'],
     );
+  }
+
+  // static Task fromSnapshot(DocumentSnapshot snap) {
+  //   return Task(snap.data['title'],snap.data['isDone'],snap.data['isCompleted'], snap.documentID);
+  // }
+
+  Map<String, Object> toDocument() {
+    return {
+      'title': title,
+      'done': isDone!,
+      'deleted': isDeleted!,
+    };
   }
 
   @override
