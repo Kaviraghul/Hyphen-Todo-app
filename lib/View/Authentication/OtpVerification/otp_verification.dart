@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_project/View/Authentication/PhoneAuth/phone_auth.dart';
+import 'package:firebase_auth_project/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
@@ -38,9 +39,7 @@ class _OtpVerificationState extends State<OtpVerification> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.network(
-              'https://assets7.lottiefiles.com/packages/lf20_bd4p6o.json',
-              width: 300),
+          Lottie.asset(Assets.verifyPin, width: 300),
           const SizedBox(height: 10),
           const Text('Eneter the Otp for verifiation',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),

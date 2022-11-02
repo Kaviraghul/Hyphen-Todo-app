@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_project/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
@@ -43,9 +44,7 @@ class _PhoneAuthState extends State<PhoneAuth> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Lottie.network(
-                  'https://assets7.lottiefiles.com/packages/lf20_huqty7bz.json',
-                  width: 250),
+              Lottie.asset(Assets.twoFactorAuth, width: 250),
               const SizedBox(height: 20),
               const Text(
                 'Enter your phone number for verification',

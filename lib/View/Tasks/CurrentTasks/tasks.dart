@@ -3,6 +3,7 @@ import 'package:firebase_auth_project/Widgets/button.dart';
 import 'package:firebase_auth_project/Widgets/tasks_list.dart';
 import 'package:firebase_auth_project/blocs/bloc_exports.dart';
 import 'package:firebase_auth_project/View/Tasks/CurrentTasks/task_model.dart';
+import 'package:firebase_auth_project/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:lottie/lottie.dart';
@@ -32,9 +33,7 @@ class _TasksState extends State<Tasks> {
                 Container(
                   color: Colors.black,
                   width: MediaQuery.of(context).size.width,
-                  child: Lottie.network(
-                      'https://assets8.lottiefiles.com/packages/lf20_z4cshyhf.json',
-                      height: 300),
+                  child: Lottie.asset(Assets.taskStatus, height: 300),
                 ),
                 const Divider(
                   height: 0.2,
