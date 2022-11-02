@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
@@ -14,7 +13,7 @@ class PhoneAuth extends StatefulWidget {
 }
 
 class _PhoneAuthState extends State<PhoneAuth> {
-  String phoneNumber = '';
+  late String phoneNumber;
   String countryCode = '+91';
   final phoneController = TextEditingController();
 
@@ -22,12 +21,8 @@ class _PhoneAuthState extends State<PhoneAuth> {
     if (phoneController != null) {
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: '${countryCode + phoneNumber}',
-        verificationCompleted: (PhoneAuthCredential credential) {
-          print("working kavi");
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          print(e);
-        },
+        verificationCompleted: (PhoneAuthCredential credential) {},
+        verificationFailed: (FirebaseAuthException e) {},
         codeSent: (String verificationId, int? resendToken) {
           PhoneAuth.verify = verificationId;
           context.go('/otpVerificationScreen');

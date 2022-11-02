@@ -18,13 +18,14 @@ class Screens extends StatelessWidget {
   final GoRouter _router = GoRouter(routes: <GoRoute>[
     GoRoute(
         path: '/',
-        builder: (BuildContext context, GoRouterState state) => Tasks()),
+        builder: (BuildContext context, GoRouterState state) =>
+            const PhoneAuth()),
     GoRoute(
         path: '/otpVerificationScreen',
         builder: (BuildContext context, GoRouterState state) =>
             const OtpVerification()),
     GoRoute(
         path: '/homeScreen',
-        builder: (BuildContext context, GoRouterState state) => Tasks())
+        builder: (BuildContext context, GoRouterState state) => const Tasks())
   ]);
 }

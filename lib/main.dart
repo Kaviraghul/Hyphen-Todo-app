@@ -1,8 +1,9 @@
 import 'package:firebase_auth_project/Screens/screens.dart';
 import 'package:firebase_auth_project/blocs/bloc_exports.dart';
-import 'package:firebase_auth_project/models/task.dart';
+import 'package:firebase_auth_project/View/Tasks/CurrentTasks/task_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,6 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    print(transition);
   }
 }
 

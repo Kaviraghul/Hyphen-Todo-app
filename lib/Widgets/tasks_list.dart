@@ -22,15 +22,35 @@ class TaskList extends StatelessWidget {
                       itemCount: snapshot.data.docs.length,
                       itemBuilder: (context, index) {
                         DocumentSnapshot task = snapshot.data.docs[index];
-                        return ListTile(
-                          title: Text(task['title']),
-                          trailing: Checkbox(
-                              value: task['done'],
-                              onChanged: (value) {
-                                // context
-                                //     .read<TasksBloc>()
-                                //     .add(UpdateTask(task: task));
-                              }),
+                        return Dismissible(
+                          background: Container(
+                            color: Colors.red,
+                            child: const Center(
+                              child: Text(
+                                'Delete this task',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          key: ValueKey(task.id),
+                          onDismissed: (direction) async {
+                            await FirebaseFirestore.instance
+                                .collection("Users")
+                                .doc(task.id)
+                                .delete();
+                          },
+                          child: ListTile(
+                            title: Text(task['title']),
+                            trailing: Checkbox(
+                                value: task['done'],
+                                onChanged: (value) async {
+                                  final doneStatus = task['done'];
+                                  await FirebaseFirestore.instance
+                                      .collection("Users")
+                                      .doc(task.id)
+                                      .update({'done': !doneStatus});
+                                }),
+                          ),
                         );
                       }),
                 );

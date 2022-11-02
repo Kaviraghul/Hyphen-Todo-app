@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth_project/models/task.dart';
+import 'package:firebase_auth_project/View/Tasks/CurrentTasks/task_model.dart';
 
 class DatabaseService {
   CollectionReference todoCollection =
@@ -8,8 +8,4 @@ class DatabaseService {
   Future createNewTodo(Task newtask) async {
     return await todoCollection.add(newtask.toDocument());
   }
-
-  // Future completeTask(uid) async {
-  //   await todoCollection.doc(uid).update({"isCompleted": !taskCompleted});
-  // }
 }

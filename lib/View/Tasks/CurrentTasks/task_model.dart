@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Task extends Equatable {
@@ -37,10 +36,6 @@ class Task extends Equatable {
       isDeleted: map['isDeleted'],
     );
   }
-
-  // static Task fromSnapshot(DocumentSnapshot snap) {
-  //   return Task(snap.data['title'],snap.data['isDone'],snap.data['isCompleted'], snap.documentID);
-  // }
 
   Map<String, Object> toDocument() {
     return {
