@@ -50,8 +50,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  r_flutter: ^0.9.0
   build_runner: ^2.3.2
+  flutter_gen: ^5.1.0+1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -63,20 +63,16 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
-r_flutter:
-  intl: lib/i18n/en.arb
-
 # The following section is specific to Flutter packages.
 flutter:
-  generate: true
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-assets:
-  - assets/task_status.json
-  - assets/two_factor_auth.josn
-  - assets/verify_pin.json
-  - assets/dog.jpg
+  assets:
+    - assets/task_status.json
+    - assets/two_factor_auth.json
+    - assets/verify_pin.json
+    - assets/dog.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

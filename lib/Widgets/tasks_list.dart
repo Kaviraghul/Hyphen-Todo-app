@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth_project/models/task.dart';
+import 'package:firebase_auth_project/View/Tasks/CurrentTasks/task_model.dart';
 import 'package:flutter/material.dart';
 
 class TaskList extends StatelessWidget {

@@ -79,7 +79,7 @@ class _TasksState extends State<Tasks> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         'Add new task',
                         style: TaskTheme.newTask,
                       ),

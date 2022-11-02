@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TaskTheme {
-  static final TextStyle newTask =
+  static const TextStyle newTask =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-
-  static final TextStyle ghgh = newTask.copyWith(fontSize: 35);
+  static const TextStyle textField =
+      TextStyle(fontSize: 16, fontWeight: FontWeight.w400);
 }

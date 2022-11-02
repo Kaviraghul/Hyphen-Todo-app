@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth_project/Service/firestore_service.dart';
-import 'package:firebase_auth_project/models/task.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth_project/View/Tasks/CurrentTasks/task_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'tasks_event.dart';
